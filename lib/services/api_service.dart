@@ -10,8 +10,9 @@ class ApiService {
   static const String key = "KEY=ff18d1f939d14ed4b63fd660db781aed";
 
   static Future<List<SchoolInfoModel>> getSchoolLists(String input) async {
+    print('나 호출됨');
     List<SchoolInfoModel> schoolInstances = [];
-    final url = Uri.parse('$baseUrl//schoolInfo?$key&$setting&$input');
+    final url = Uri.parse('$baseUrl/schoolInfo?$key&$setting&$input');
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final List<dynamic> schools = jsonDecode(response.body);

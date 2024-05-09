@@ -63,7 +63,7 @@ class _TodayScreenState extends State<TodayScreen> {
                           ),
                           child: Center(
                             child: TextField(
-                              onSubmitted: (value) {
+                              onChanged: (value) {
                                 schoolNameInput = value;
                                 print(schoolNameInput);
                               },

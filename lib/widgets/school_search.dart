@@ -52,23 +52,45 @@ class _SchoolSearchState extends State<SchoolSearch> {
             future: schools,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                //TODO Api 불러와서 표로 만들어주기
-                return ListView.separated(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) {
-                    return Container();
-                  },
-                  separatorBuilder: (context, index) => const Divider(
-                    height: 10,
-                    color: Colors.blue,
-                  ),
+                print('i have a data');
+                return Column(
+                  children: [
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Expanded(
+                      child: makeList(snapshot),
+                    ),
+                  ],
                 );
               } else {
+                //TODO why no api fix this
+                print('no api data');
                 throw Error();
               }
             },
           ),
         ),
+      ),
+    );
+  }
+
+  ListView makeList(AsyncSnapshot<List<SchoolInfoModel>> snapshot) {
+    return ListView.separated(
+      padding: const EdgeInsets.all(5),
+      itemCount: snapshot.data!.length,
+      itemBuilder: (context, index) {
+        var school = snapshot.data![index];
+        return Container(
+          height: 25,
+          color: Colors.green,
+          child: Center(
+            child: Text("$school"),
+          ),
+        );
+      },
+      separatorBuilder: (context, index) => const SizedBox(
+        height: 10,
       ),
     );
   }
