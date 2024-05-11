@@ -10,15 +10,19 @@ class ApiService {
   static const String key = "KEY=ff18d1f939d14ed4b63fd660db781aed";
 
   static Future<List<SchoolInfoModel>> getSchoolLists(String input) async {
-    print('나 호출됨');
     List<SchoolInfoModel> schoolInstances = [];
-    final url = Uri.parse('$baseUrl/schoolInfo?$key&$setting&$input');
+    final url = Uri.parse('$baseUrl/schoolInfo?$key&$setting&SCHUL_NM=$input');
     final response = await http.get(url);
     if (response.statusCode == 200) {
-      final List<dynamic> schools = jsonDecode(response.body);
+      List schools = [];
+      final Map schoolinstances1 = jsonDecode(response.body); //api Map으로 받고
+      List schoolinstances2 = schoolinstances1['schoolInfo']; //Map에 있는 List받고
+      Map schoolinstances3 = schoolinstances2[1]; //List에 있는 Map받고
+      schools = schoolinstances3['row']; //Map에 있는 List받기
       for (var school in schools) {
         schoolInstances.add(SchoolInfoModel.fromJson(school));
       }
+      print(schoolInstances);
       return schoolInstances;
     }
     throw Error();

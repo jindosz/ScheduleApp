@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/services.dart';
 
 import '../widgets/school_search.dart';
 
@@ -10,21 +10,17 @@ class TodayScreen extends StatefulWidget {
   State<TodayScreen> createState() => _TodayScreenState();
 }
 
-class _TodayScreenState extends State<TodayScreen> {
-  late SharedPreferences prefs;
-  bool isFirst = true;
+//TODO 첫화면체크랑 위에거 기기에 저장하기 만들기
 
-  Future initPrefs() async {
-    prefs = await SharedPreferences.getInstance();
-    final bool? todayIsFirst = prefs.getBool('todayIsFirst');
-    if (todayIsFirst != null) {
-      isFirst = false;
-    }
-  }
+class _TodayScreenState extends State<TodayScreen> {
+  bool isFirst = true;
+  FocusNode textFocus1 = FocusNode();
+  FocusNode textFocus2 = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     String schoolNameInput = '';
+    String schoolNumber = '';
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -56,22 +52,31 @@ class _TodayScreenState extends State<TodayScreen> {
                       children: [
                         Container(
                           width: 200,
-                          height: 40,
+                          height: 55,
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 245, 242, 242),
                             border: Border.all(),
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Center(
-                            child: TextField(
-                              onChanged: (value) {
-                                schoolNameInput = value;
-                                print(schoolNameInput);
-                              },
-                              textAlign: TextAlign.center,
-                              decoration: const InputDecoration(
-                                hintText: '학교 이름 입력',
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              TextField(
+                                focusNode: textFocus1,
+                                onChanged: (value) {
+                                  schoolNameInput = value;
+                                },
+                                textAlign: TextAlign.center,
+                                decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: '학교 이름 입력',
+                                ),
+                                onEditingComplete: () {
+                                  textFocus1.unfocus();
+                                },
                               ),
-                            ),
+                            ],
                           ),
                         ),
                         const SizedBox(
@@ -79,7 +84,7 @@ class _TodayScreenState extends State<TodayScreen> {
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(10, 40),
+                            minimumSize: const Size(20, 55),
                             backgroundColor: Colors.white,
                             shadowColor: Colors.black,
                             elevation: 5,
@@ -102,7 +107,44 @@ class _TodayScreenState extends State<TodayScreen> {
                           },
                         ),
                       ],
-                    )
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: 315,
+                      height: 55,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 245, 242, 242),
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          TextField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              LengthLimitingTextInputFormatter(5),
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            focusNode: textFocus2,
+                            onChanged: (value) {
+                              schoolNumber = value;
+                            },
+                            textAlign: TextAlign.center,
+                            decoration: const InputDecoration(
+                              border: InputBorder.none,
+                              hintText: '학번 입력',
+                            ),
+                            onEditingComplete: () {
+                              textFocus2.unfocus();
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               )
