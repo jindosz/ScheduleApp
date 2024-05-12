@@ -22,7 +22,6 @@ class ApiService {
       for (var school in schools) {
         schoolInstances.add(SchoolInfoModel.fromJson(school));
       }
-      print(schoolInstances);
       return schoolInstances;
     }
     throw Error();
