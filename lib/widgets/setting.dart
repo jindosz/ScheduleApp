@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'school_search.dart';
@@ -29,9 +27,9 @@ class _settingState extends State<Setting> {
 
   bool isSchoolName = false;
 
-  String? selectedSchoolName;
-  String? selectedSchoolCity;
-  String? selectedSchoolNumber;
+  String selectedSchoolName = '학교를 입력해주세요';
+  String selectedSchoolCity = '지역을 입력해주세요';
+  String selectedSchoolNumber = '학번을 입력해주세요';
 
   Future initPref() async {
     prefs = await SharedPreferences.getInstance();
@@ -39,7 +37,7 @@ class _settingState extends State<Setting> {
     final schoolCity = prefs.getString('City');
     final schoolNumber = prefs.getString('schoolNumber');
 
-    if (schoolName != null) {
+    if (schoolName != null && schoolCity != null) {
       isSchoolName == true;
       selectedSchoolName = schoolName;
       selectedSchoolCity = schoolCity;
@@ -237,7 +235,7 @@ class _settingState extends State<Setting> {
               child: Column(
                 children: [
                   Text(
-                    '$selectedSchoolCity',
+                    selectedSchoolCity,
                     style: const TextStyle(
                       fontSize: 15,
                     ),
@@ -253,7 +251,7 @@ class _settingState extends State<Setting> {
                     height: 5,
                   ),
                   Text(
-                    '$selectedSchoolName',
+                    selectedSchoolName,
                     style: const TextStyle(
                       fontSize: 15,
                     ),
@@ -269,7 +267,7 @@ class _settingState extends State<Setting> {
                     height: 5,
                   ),
                   Text(
-                    '$selectedSchoolNumber',
+                    selectedSchoolNumber,
                     style: const TextStyle(
                       fontSize: 15,
                     ),

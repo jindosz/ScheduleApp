@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,14 +16,20 @@ class FirstScreen extends StatefulWidget {
 
 class _FirstScreenState extends State<FirstScreen> {
   late SharedPreferences prefs;
+
   bool isFirst = true;
+  bool todayIsFirst = true;
 
   Future initPrefs() async {
     prefs = await SharedPreferences.getInstance();
     final first = prefs.getBool('isFirst');
+    final todayScreenIsFirst = prefs.getBool('todayIsFirst');
     if (first == false) {
       setState(() {
         isFirst = false;
+        if (todayScreenIsFirst!) {
+          todayIsFirst = todayScreenIsFirst;
+        }
       });
     } else {
       prefs.setBool('isFirst', true);
@@ -31,7 +39,7 @@ class _FirstScreenState extends State<FirstScreen> {
   @override
   void initState() {
     super.initState();
-    initPrefs();
+    // initPrefs();
   }
 
   @override
