@@ -31,7 +31,7 @@ class _FirstScreenState extends State<FirstScreen> {
   @override
   void initState() {
     super.initState();
-    // initPrefs();
+    initPrefs();
   }
 
   @override
@@ -49,7 +49,14 @@ class _FirstScreenState extends State<FirstScreen> {
                         MaterialPageRoute(
                           builder: (context) => const Setting(),
                         ),
-                      );
+                      ).then((value) => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => isFirst
+                                  ? const TodayScreen()
+                                  : const WeekScreen(),
+                            ),
+                          ));
                     },
                     child: Container(
                       decoration: BoxDecoration(

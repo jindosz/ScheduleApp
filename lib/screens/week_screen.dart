@@ -8,6 +8,7 @@ class WeekScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         surfaceTintColor: const Color.fromARGB(255, 24, 6, 131),
         backgroundColor: const Color.fromARGB(255, 24, 6, 131),
         shadowColor: Colors.black,
