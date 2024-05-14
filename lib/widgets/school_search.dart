@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_schedule_app/services/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,12 +26,16 @@ class _SchoolSearchState extends State<SchoolSearch> {
     required String schoolName,
     required String schoolCity,
     required String officeOfEducation,
+    required String educationCode,
+    required String schoolCode,
   }) async {
     prefs = await SharedPreferences.getInstance();
     prefs.setString('schoolName', schoolName);
     prefs.setString('City', schoolCity);
     prefs.setString('officeOfEducation', officeOfEducation);
-  }
+    prefs.setString('educationCode', educationCode);
+    prefs.setString('schoolCode', schoolCode);
+  } // 학교 검색한거 저장
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +96,7 @@ class _SchoolSearchState extends State<SchoolSearch> {
   }
 
   makeList(AsyncSnapshot<List<SchoolInfoModel>> snapshot) {
+    //표처럼 띄우는거
     return Center(
       child: Column(
         children: [
@@ -198,6 +201,8 @@ class _SchoolSearchState extends State<SchoolSearch> {
                                 schoolName: school.schoolName,
                                 schoolCity: school.city,
                                 officeOfEducation: school.officeOfEducation,
+                                educationCode: school.educationCode,
+                                schoolCode: school.schoolCode,
                               );
                               Navigator.pop(context, '${widget.schoolName}');
                             },
