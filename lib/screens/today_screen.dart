@@ -70,7 +70,7 @@ class _TodayScreenState extends State<TodayScreen> {
             ),
             const SizedBox(
               height: 50,
-            ), //TODO FutureBuilder bug fix
+            ),
             FutureBuilder(
               future: ApiService.getSchoolSchedule(
                 date: getToday(),
