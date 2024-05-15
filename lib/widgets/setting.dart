@@ -237,6 +237,10 @@ class _settingState extends State<Setting> {
             focusNode: textFocus2,
             onChanged: (value) {
               schoolNumber = value;
+              inputSchoolNumber();
+              setState(() {
+                initPref();
+              });
             },
             textAlign: TextAlign.center,
             decoration: const InputDecoration(

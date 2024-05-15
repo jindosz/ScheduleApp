@@ -35,17 +35,18 @@ class ApiService {
       required String schoolNumber}) async {
     List<SchoolScheduleModel> scheduleInstances = [];
     var grade = schoolNumber[0];
-    var classNumber = schoolNumber.substring(1, 2);
+    var classNumber = schoolNumber.substring(1, 3);
     if (classNumber[0] == '0') {
       classNumber = classNumber[1];
     } // 이새끼 09인식 못해서 09면 9로 바꿔줌
     final url = Uri.parse(
         '$baseUrl/hisTimetable?$key&$setting&ATPT_OFCDC_SC_CODE=$educationCode&SD_SCHUL_CODE=$schoolCode&ALL_TI_YMD=$date&GRADE=$grade&CLASS_NM=$classNumber');
-    print(url);
     final response = await http.get(url);
     if (response.statusCode == 200) {
-      final Map scheduleInstance = jsonDecode(response.body);
-      List schedules = scheduleInstance['row'];
+      final Map scheduleInstance1 = jsonDecode(response.body);
+      List scheduleInstance2 = scheduleInstance1['hisTimetable'];
+      var scheduleInstance3 = scheduleInstance2[1];
+      var schedules = scheduleInstance3['row'];
       for (var schedule in schedules) {
         scheduleInstances.add(SchoolScheduleModel.fromJson(schedule));
       }

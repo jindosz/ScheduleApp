@@ -35,7 +35,6 @@ class _TodayScreenState extends State<TodayScreen> {
     DateFormat formatter = DateFormat('yyyy-MM-dd');
     var strToday = formatter.format(now);
     var result = strToday.replaceAll('-', '');
-    print(result);
     return result;
   }
 
@@ -97,10 +96,6 @@ class _TodayScreenState extends State<TodayScreen> {
                         PeroidAndClassContentBox(
                           peroid: schedule.perio,
                           schoolContent: schedule.classContent,
-                        ),
-                      for (var i in snapshot.data!)
-                        const SizedBox(
-                          height: 25,
                         ),
                     ],
                   );
