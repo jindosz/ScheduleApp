@@ -49,7 +49,7 @@ class _TodayScreenState extends State<TodayScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow,
+      backgroundColor: Colors.white,
       body: SliderDrawer(
         appBar: SliderAppBar(
           appBarHeight: 101,

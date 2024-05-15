@@ -37,6 +37,7 @@ class SettingDisplay extends StatelessWidget {
                   ),
                   Divider(
                     height: 2,
+                    thickness: 1,
                     color: Colors.black,
                   ),
                   SizedBox(
@@ -54,6 +55,7 @@ class SettingDisplay extends StatelessWidget {
                   ),
                   Divider(
                     height: 2,
+                    thickness: 1,
                     color: Colors.black,
                   ),
                   SizedBox(
@@ -90,6 +92,7 @@ class SettingDisplay extends StatelessWidget {
                   ),
                   const Divider(
                     height: 2,
+                    thickness: 1,
                     color: Colors.black,
                   ),
                   const SizedBox(
@@ -106,6 +109,7 @@ class SettingDisplay extends StatelessWidget {
                   ),
                   const Divider(
                     height: 2,
+                    thickness: 1,
                     color: Colors.black,
                   ),
                   const SizedBox(

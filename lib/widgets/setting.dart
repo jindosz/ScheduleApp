@@ -84,7 +84,6 @@ class _settingState extends State<Setting> {
         prefs.setBool('todayIsFirst', false);
       }
     }
-    print(prefs.getBool('todayIsFirst'));
   }
 
   Future inputSchoolNumber() async {

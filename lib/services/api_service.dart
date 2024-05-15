@@ -34,8 +34,6 @@ class ApiService {
       required String date,
       required String schoolNumber}) async {
     List<SchoolScheduleModel> scheduleInstances = [];
-    print(schoolNumber);
-    schoolNumber = '10101';
     var grade = schoolNumber[0];
     var classNumber = schoolNumber.substring(1, 3);
     if (classNumber[0] == '0') {
