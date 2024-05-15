@@ -236,7 +236,11 @@ class _settingState extends State<Setting> {
             ],
             focusNode: textFocus2,
             onChanged: (value) {
-              schoolNumber = value;
+              if (value == '') {
+                schoolNumber = '학번을 입력해주세요';
+              } else {
+                schoolNumber = value;
+              }
               inputSchoolNumber();
               setState(() {
                 initPref();

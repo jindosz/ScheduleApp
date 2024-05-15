@@ -117,7 +117,7 @@ class PeroidAndClassContentBox extends StatelessWidget {
           ],
         ),
         const SizedBox(
-          height: 25,
+          height: 35,
         ),
       ],
     );
