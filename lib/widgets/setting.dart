@@ -91,6 +91,14 @@ class _settingState extends State<Setting> {
     prefs.setString('schoolNumber', schoolNumber);
   }
 
+  bool todayIsFirstScreen() {
+    if (selectedtodays[0]) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -163,7 +171,8 @@ class _settingState extends State<Setting> {
                 ),
                 onPressed: () {
                   changeIsFirst();
-                  Navigator.pop(context);
+                  Navigator.popAndPushNamed(context,
+                      todayIsFirstScreen() ? 'todayScreen' : 'weekScreen');
                 },
               ),
             ],

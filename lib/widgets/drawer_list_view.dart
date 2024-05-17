@@ -7,9 +7,6 @@ class DrawerListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isTodayScreen;
-    //TODO 현 화면따라 이번주-오늘 바꾸기
-
     return ListView(
       padding: EdgeInsets.zero,
       children: [
@@ -23,6 +20,15 @@ class DrawerListView extends StatelessWidget {
           title: const Text('이번주 시간표'),
           onTap: () {
             Navigator.popAndPushNamed(context, 'weekScreen');
+          },
+        ),
+        const Divider(
+          color: Colors.black,
+        ),
+        ListTile(
+          title: const Text('오늘의 시간표'),
+          onTap: () {
+            Navigator.popAndPushNamed(context, 'todayScreen');
           },
         ),
         const Divider(

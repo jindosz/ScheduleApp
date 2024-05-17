@@ -34,6 +34,7 @@ class ApiService {
       required String date,
       required String schoolNumber}) async {
     List<SchoolScheduleModel> scheduleInstances = [];
+    schoolNumber = '30927'; //TODO 핸드폰에서만 이상함
     var grade = schoolNumber[0];
     var classNumber = schoolNumber.substring(1, 3);
     if (classNumber[0] == '0') {
@@ -53,5 +54,24 @@ class ApiService {
       return scheduleInstances;
     }
     throw Error();
+  }
+
+  static Future<List<dynamic>> getSchoolSchedules(
+      {required String educationCode,
+      required String schoolCode,
+      required List dates,
+      required String schoolNumber}) async {
+    List weekSchoolScheduleInstances = [];
+    for (var date in dates) {
+      weekSchoolScheduleInstances.add(
+        getSchoolSchedule(
+          date: date,
+          educationCode: educationCode,
+          schoolCode: schoolCode,
+          schoolNumber: schoolNumber,
+        ),
+      );
+    }
+    return weekSchoolScheduleInstances;
   }
 }
