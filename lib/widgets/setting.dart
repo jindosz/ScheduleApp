@@ -101,6 +101,16 @@ class _settingState extends State<Setting> {
     }
   }
 
+  bool setBox(selectedSchoolName) {
+    bool nameIsShort;
+    if (selectedSchoolName.toString().length > 8) {
+      nameIsShort = false;
+    } else {
+      nameIsShort = true;
+    }
+    return nameIsShort;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -127,33 +137,31 @@ class _settingState extends State<Setting> {
                 const Text(
                   '설정',
                   style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 30,
                     color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 10,
                 ),
-                schoolSearch(context),
-                Stack(
-                  children: [
-                    schoolNumberInput(),
-                    Transform.translate(
-                      offset: const Offset(0, 110),
-                      child: isTodaySetting(),
-                    ),
-                  ],
+                SettingDisplay(
+                  // 세팅한거 보여주는 거 나중에 이쁘게 할거임
+                  selectedSchoolCity: selectedSchoolCity,
+                  selectedSchoolName: selectedSchoolName,
+                  selectedSchoolNumber: selectedSchoolNumber,
+                  nameIsShort: setBox(selectedSchoolName),
                 ),
                 const SizedBox(
-                  height: 170,
+                  height: 20,
+                ),
+                schoolSearch(context),
+                schoolNumberInput(),
+                isTodaySetting(),
+                const SizedBox(
+                  height: 50,
                 ),
                 saveButton(context),
-                SettingDisplay(
-                    // 세팅한거 보여주는 거 나중에 이쁘게 할거임
-                    selectedSchoolCity: selectedSchoolCity,
-                    selectedSchoolName: selectedSchoolName,
-                    selectedSchoolNumber: selectedSchoolNumber),
               ],
             ),
           ),
@@ -328,6 +336,9 @@ class _settingState extends State<Setting> {
               ),
             ],
           ),
+        ),
+        const SizedBox(
+          height: 20,
         ),
       ],
     );
