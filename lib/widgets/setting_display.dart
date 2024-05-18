@@ -14,122 +14,91 @@ class SettingDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Row(
-        children: [
-          const Spacer(
-            flex: 1,
-          ),
-          const Flexible(
-            flex: 1,
-            child: Center(
-              child: Column(
-                children: [
-                  Text(
-                    '지역',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Divider(
-                    height: 2,
-                    thickness: 1,
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    '학교',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Divider(
-                    height: 2,
-                    thickness: 1,
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    '학번',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Center(
+          child: Column(
+            children: [
+              Text(
+                '지역',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
               ),
-            ),
-          ),
-          const VerticalDivider(
-            width: 2,
-            color: Colors.black,
-          ),
-          Flexible(
-            flex: 3,
-            child: Center(
-              child: Column(
-                children: [
-                  Text(
-                    selectedSchoolCity,
-                    style: const TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const Divider(
-                    height: 2,
-                    thickness: 1,
-                    color: Colors.black,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    selectedSchoolName,
-                    style: const TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const Divider(
-                    height: 2,
-                    thickness: 1,
-                    color: Colors.black,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    selectedSchoolNumber,
-                    style: const TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                ],
+              SizedBox(
+                height: 5,
               ),
-            ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                '학교',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                '학번',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
-          const Spacer(
-            flex: 1,
+        ),
+        Center(
+          child: Column(
+            children: [
+              Text(
+                selectedSchoolCity,
+                style: const TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                selectedSchoolName,
+                style: const TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                selectedSchoolNumber,
+                style: const TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

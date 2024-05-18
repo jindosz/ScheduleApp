@@ -34,7 +34,6 @@ class ApiService {
       required String date,
       required String schoolNumber}) async {
     List<SchoolScheduleModel> scheduleInstances = [];
-    schoolNumber = '30927'; //TODO 핸드폰에서만 이상함
     var grade = schoolNumber[0];
     var classNumber = schoolNumber.substring(1, 3);
     if (classNumber[0] == '0') {
