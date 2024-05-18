@@ -136,10 +136,17 @@ class _settingState extends State<Setting> {
                   height: 30,
                 ),
                 schoolSearch(context),
-                schoolNumberInput(),
-                isTodaySetting(),
+                Stack(
+                  children: [
+                    schoolNumberInput(),
+                    Transform.translate(
+                      offset: const Offset(0, 110),
+                      child: isTodaySetting(),
+                    ),
+                  ],
+                ),
                 const SizedBox(
-                  height: 50,
+                  height: 170,
                 ),
                 saveButton(context),
                 SettingDisplay(
@@ -321,9 +328,6 @@ class _settingState extends State<Setting> {
               ),
             ],
           ),
-        ),
-        const SizedBox(
-          height: 20,
         ),
       ],
     );
