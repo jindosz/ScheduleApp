@@ -42,8 +42,7 @@ class _FirstScreenState extends State<FirstScreen> {
   @override
   void initState() {
     super.initState();
-    // initPrefs();
-    //TODO 테스트
+    initPrefs();
   }
 
   @override
