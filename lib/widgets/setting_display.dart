@@ -99,7 +99,7 @@ class SettingDisplay extends StatelessWidget {
             width: 1,
           ),
           Flexible(
-            flex: 4,
+            flex: 5,
             child: Center(
               child: Column(
                 children: [

@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'school_search.dart';
@@ -103,7 +101,10 @@ class _settingState extends State<Setting> {
 
   bool setBox(selectedSchoolName) {
     bool nameIsShort;
-    if (selectedSchoolName.toString().length > 8) {
+    if (selectedSchoolName == '학교를 입력해주세요') {
+      return true;
+    }
+    if (selectedSchoolName.toString().length > 9) {
       nameIsShort = false;
     } else {
       nameIsShort = true;
