@@ -80,29 +80,38 @@ class _WeekScreenState extends State<WeekScreen> {
           ),
         ),
         slider: const DrawerListView(),
-        child: FutureBuilder(
-          // Future를 받아오는 빌더
-          future: ApiService.getSchoolSchedules(
-              // 받아옴
-              educationCode: educationCode,
-              schoolCode: schoolCode,
-              dates: getweekdays(),
-              schoolNumber: schoolNumber),
-          builder: (context, snapshot) {
-            if (snapshot.hasData == false) {
-              return const CircularProgressIndicator(); //정보받을때까지 로딩보여줌
-            } else if (snapshot.hasError) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Error: ${snapshot.error}', // 에러명을 텍스트에 뿌려줌
-                  style: const TextStyle(fontSize: 15),
-                ),
-              );
-            } else {
-              return const WeekSchedules(); // 여기다 꾸미면됨
-            }
-          },
+        child: Row(
+          children: [
+            Column(
+              children: [Container()],
+            ),
+            FutureBuilder(
+              // Future를 받아오는 빌더
+              future: ApiService.getSchoolSchedules(
+                  // 받아옴
+                  educationCode: educationCode,
+                  schoolCode: schoolCode,
+                  dates: getweekdays(),
+                  schoolNumber: schoolNumber),
+              builder: (context, snapshot) {
+                if (snapshot.hasData == false) {
+                  return const CircularProgressIndicator(); //정보받을때까지 로딩보여줌
+                } else if (snapshot.hasError) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Error: ${snapshot.error}', // 에러명을 텍스트에 뿌려줌
+                      style: const TextStyle(fontSize: 15),
+                    ),
+                  );
+                } else {
+                  return WeekSchedules(
+                    snapshot: snapshot.data!,
+                  ); // 여기다 꾸미면됨
+                }
+              },
+            ),
+          ],
         ),
       ),
     );

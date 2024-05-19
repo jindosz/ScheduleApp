@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class SettingDisplay extends StatelessWidget {
   const SettingDisplay({
@@ -6,127 +8,147 @@ class SettingDisplay extends StatelessWidget {
     required this.selectedSchoolCity,
     required this.selectedSchoolName,
     required this.selectedSchoolNumber,
+    required this.nameIsShort,
   });
 
   final String selectedSchoolCity;
   final String selectedSchoolName;
   final String selectedSchoolNumber;
+  final bool nameIsShort;
 
   @override
   Widget build(BuildContext context) {
     return IntrinsicHeight(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Spacer(
-            flex: 1,
+          const VerticalDivider(
+            indent: 7,
+            endIndent: 7,
+            color: Colors.white,
+            thickness: 1,
+            width: 1,
           ),
-          const Flexible(
-            flex: 1,
+          Flexible(
+            flex: 2,
+            child: Column(
+              children: [
+                const Divider(
+                  color: Colors.white,
+                ),
+                const Text(
+                  '지역',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+                const Divider(
+                  color: Colors.white,
+                ),
+                nameIsShort
+                    ? const Text(
+                        '학교',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      )
+                    : const Column(
+                        children: [
+                          SizedBox(
+                            height: 11,
+                          ),
+                          Text(
+                            '학교',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10.5,
+                          ),
+                        ],
+                      ),
+                const Divider(
+                  color: Colors.white,
+                ),
+                const Text(
+                  '학번',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+                const Divider(
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          ),
+          const VerticalDivider(
+            indent: 7,
+            endIndent: 7,
+            color: Colors.white,
+            thickness: 1,
+            width: 1,
+          ),
+          Flexible(
+            flex: 5,
             child: Center(
               child: Column(
                 children: [
-                  Text(
-                    '지역',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Divider(
-                    height: 2,
-                    thickness: 1,
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    height: 5,
+                  const Divider(
+                    color: Colors.white,
                   ),
                   Text(
-                    '학교',
-                    style: TextStyle(
+                    selectedSchoolCity,
+                    style: const TextStyle(
                       fontSize: 15,
-                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
                     ),
                   ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Divider(
-                    height: 2,
-                    thickness: 1,
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    height: 5,
+                  const Divider(
+                    color: Colors.white,
                   ),
                   Text(
-                    '학번',
-                    style: TextStyle(
+                    selectedSchoolName,
+                    style: const TextStyle(
                       fontSize: 15,
-                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
                     ),
+                  ),
+                  const Divider(
+                    color: Colors.white,
+                  ),
+                  Text(
+                    selectedSchoolNumber,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const Divider(
+                    color: Colors.white,
                   ),
                 ],
               ),
             ),
           ),
           const VerticalDivider(
-            width: 2,
-            color: Colors.black,
-          ),
-          Flexible(
-            flex: 3,
-            child: Center(
-              child: Column(
-                children: [
-                  Text(
-                    selectedSchoolCity,
-                    style: const TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const Divider(
-                    height: 2,
-                    thickness: 1,
-                    color: Colors.black,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    selectedSchoolName,
-                    style: const TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const Divider(
-                    height: 2,
-                    thickness: 1,
-                    color: Colors.black,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    selectedSchoolNumber,
-                    style: const TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            indent: 7,
+            endIndent: 7,
+            color: Colors.white,
+            thickness: 1,
+            width: 1,
           ),
           const Spacer(
-            flex: 1,
+            flex: 4,
           ),
         ],
       ),

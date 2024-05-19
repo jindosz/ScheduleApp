@@ -40,24 +40,7 @@ class _SchoolSearchState extends State<SchoolSearch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        surfaceTintColor: const Color.fromARGB(255, 24, 6, 131),
-        backgroundColor: const Color.fromARGB(255, 24, 6, 131),
-        shadowColor: Colors.black,
-        elevation: 5,
-        title: const Center(
-          child: Text(
-            '학교 검색',
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 30,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ),
+      backgroundColor: const Color.fromARGB(255, 36, 35, 69),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -84,6 +67,9 @@ class _SchoolSearchState extends State<SchoolSearch> {
               } else {
                 return Column(
                   children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
                     makeList(snapshot),
                   ],
                 );
@@ -107,7 +93,7 @@ class _SchoolSearchState extends State<SchoolSearch> {
                   flex: 1,
                 ),
                 Flexible(
-                  flex: 2,
+                  flex: 3,
                   child: Center(
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -116,8 +102,9 @@ class _SchoolSearchState extends State<SchoolSearch> {
                       child: const Text(
                         '지역',
                         style: TextStyle(
+                          color: Colors.white,
                           fontSize: 20,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w900,
                         ),
                       ),
                     ),
@@ -127,7 +114,7 @@ class _SchoolSearchState extends State<SchoolSearch> {
                   flex: 1,
                 ),
                 const VerticalDivider(
-                  color: Colors.black,
+                  color: Color.fromARGB(255, 75, 75, 101),
                   width: 2,
                   thickness: 1,
                 ),
@@ -135,7 +122,7 @@ class _SchoolSearchState extends State<SchoolSearch> {
                   flex: 1,
                 ),
                 Flexible(
-                  flex: 4,
+                  flex: 6,
                   child: Center(
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -144,8 +131,9 @@ class _SchoolSearchState extends State<SchoolSearch> {
                       child: const Text(
                         '학교명',
                         style: TextStyle(
+                          color: Colors.white,
                           fontSize: 20,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
@@ -160,7 +148,7 @@ class _SchoolSearchState extends State<SchoolSearch> {
           const Divider(
             height: 2,
             thickness: 1,
-            color: Colors.black,
+            color: Color.fromARGB(255, 75, 75, 101),
           ),
           for (var school in snapshot.data!)
             if (school.level == '고등학교')
@@ -172,10 +160,15 @@ class _SchoolSearchState extends State<SchoolSearch> {
                         flex: 1,
                       ),
                       Flexible(
-                        flex: 2,
+                        flex: 3,
                         child: Center(
                           child: SizedBox(
-                            child: Text(school.city),
+                            child: Text(
+                              school.city,
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -183,8 +176,8 @@ class _SchoolSearchState extends State<SchoolSearch> {
                         flex: 1,
                       ),
                       Container(
-                        decoration: BoxDecoration(
-                          color: Colors.grey.withOpacity(0.8),
+                        decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 75, 75, 101),
                         ),
                         width: 1,
                         height: 50,
@@ -193,7 +186,7 @@ class _SchoolSearchState extends State<SchoolSearch> {
                         flex: 1,
                       ),
                       Flexible(
-                        flex: 4,
+                        flex: 6,
                         child: Center(
                           child: GestureDetector(
                             onTap: () {
@@ -222,9 +215,9 @@ class _SchoolSearchState extends State<SchoolSearch> {
                       ),
                     ],
                   ),
-                  Divider(
+                  const Divider(
                     height: 1,
-                    color: Colors.grey.withOpacity(0.8),
+                    color: Color.fromARGB(255, 75, 75, 101),
                   ),
                 ],
               ),
