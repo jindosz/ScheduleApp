@@ -122,7 +122,7 @@ class _settingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 36, 35, 69),
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -178,7 +178,7 @@ class _settingState extends State<Setting> {
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             minimumSize: const Size(100, 50),
-            backgroundColor: const Color.fromARGB(255, 120, 118, 254),
+            backgroundColor: Theme.of(context).cardColor,
             shadowColor: Colors.black,
             elevation: 5,
           ),
@@ -204,10 +204,10 @@ class _settingState extends State<Setting> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           '시작 화면',
           style: TextStyle(
-            color: Color.fromARGB(255, 120, 118, 254),
+            color: Theme.of(context).cardColor,
             fontSize: 17,
             fontWeight: FontWeight.w700,
           ),
@@ -217,9 +217,9 @@ class _settingState extends State<Setting> {
         ),
         Container(
           height: 50,
-          decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 75, 75, 101),
-            borderRadius: BorderRadius.all(
+          decoration: BoxDecoration(
+            color: Theme.of(context).hintColor,
+            borderRadius: const BorderRadius.all(
               Radius.circular(25),
             ),
           ),
@@ -228,7 +228,7 @@ class _settingState extends State<Setting> {
               return ToggleButtons(
                 constraints:
                     BoxConstraints.expand(width: constraints.maxWidth / 2 - 2),
-                fillColor: const Color.fromARGB(255, 120, 118, 254),
+                fillColor: Theme.of(context).cardColor,
                 selectedColor: Colors.white,
                 color: Colors.white,
                 onPressed: (int index) {
@@ -279,10 +279,10 @@ class _settingState extends State<Setting> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           '학번',
           style: TextStyle(
-            color: Color.fromARGB(255, 120, 118, 254),
+            color: Theme.of(context).cardColor,
             fontSize: 17,
             fontWeight: FontWeight.w700,
           ),
@@ -314,24 +314,24 @@ class _settingState extends State<Setting> {
                   } else {
                     schoolNumber = value;
                   }
-                  inputSchoolNumber();
                   setState(() {
                     initPref();
+                    inputSchoolNumber();
                   });
                 },
                 textAlign: TextAlign.center,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: '학번 입력',
                   hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 75, 75, 101),
+                      color: Theme.of(context).hintColor,
                       fontWeight: FontWeight.w600),
                 ),
                 onEditingComplete: () {
                   textFocus2.unfocus();
-                  inputSchoolNumber();
                   setState(() {
                     initPref();
+                    inputSchoolNumber();
                   });
                 },
               ),
@@ -349,10 +349,10 @@ class _settingState extends State<Setting> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           '학교',
           style: TextStyle(
-            color: Color.fromARGB(255, 120, 118, 254),
+            color: Theme.of(context).cardColor,
             fontSize: 17,
             fontWeight: FontWeight.w700,
           ),
@@ -382,11 +382,11 @@ class _settingState extends State<Setting> {
                         schoolNameInput = value;
                       },
                       textAlign: TextAlign.center,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: '학교 이름 입력',
                         hintStyle: TextStyle(
-                            color: Color.fromARGB(255, 75, 75, 101),
+                            color: Theme.of(context).hintColor,
                             fontWeight: FontWeight.w600),
                       ),
                       onEditingComplete: () {
@@ -402,7 +402,7 @@ class _settingState extends State<Setting> {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 120, 118, 254),
+                backgroundColor: Theme.of(context).cardColor,
                 minimumSize: const Size(50, 63),
               ),
               child: const Text(

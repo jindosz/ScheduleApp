@@ -40,6 +40,15 @@ class _TodayScreenState extends State<TodayScreen> {
     return result;
   }
 
+  String currentScreen() {
+    var name = ModalRoute.of(context)?.settings.name;
+    if (name != null) {
+      return name;
+    } else {
+      return '';
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -49,11 +58,12 @@ class _TodayScreenState extends State<TodayScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 29, 28, 56),
       body: SliderDrawer(
         appBar: SliderAppBar(
+          drawerIconColor: Theme.of(context).hintColor,
           appBarHeight: 101,
-          appBarColor: Colors.yellow[100]!,
+          appBarColor: Theme.of(context).colorScheme.background,
           isTitleCenter: false,
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,11 +71,16 @@ class _TodayScreenState extends State<TodayScreen> {
               const SizedBox(
                 height: 20,
               ),
-              Text('$schoolName의'),
+              Text(
+                '$schoolName의',
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),
               const Text(
                 '오늘의 시간표',
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 22,
                   fontWeight: FontWeight.w900,
                 ),
@@ -75,49 +90,51 @@ class _TodayScreenState extends State<TodayScreen> {
         ),
         sliderOpenSize: 150,
         slideDirection: SlideDirection.RIGHT_TO_LEFT,
-        slider: const DrawerListView(),
-        child: Container(
-          color: Colors.yellow[100],
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  height: 50,
-                ),
-                FutureBuilder(
-                  future: ApiService.getSchoolSchedule(
-                    date: getToday(),
-                    educationCode: educationCode,
-                    schoolCode: schoolCode,
-                    schoolNumber: schoolNumber,
+        slider: DrawerListView(screen: currentScreen()),
+        child: SingleChildScrollView(
+          child: Container(
+            color: Theme.of(context).colorScheme.background,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 50,
                   ),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData == false) {
-                      return const CircularProgressIndicator();
-                    } else if (snapshot.hasError) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Error: ${snapshot.error}', // 에러명을 텍스트에 뿌려줌
-                          style: const TextStyle(fontSize: 15),
-                        ),
-                      );
-                    } else {
-                      return Column(
-                        children: [
-                          for (var schedule in snapshot.data!)
-                            PeroidAndClassContentBox(
-                              peroid: schedule.perio,
-                              schoolContent: schedule.classContent,
-                            ),
-                        ],
-                      );
-                    }
-                  },
-                ),
-              ],
+                  FutureBuilder(
+                    future: ApiService.getSchoolSchedule(
+                      date: getToday(),
+                      educationCode: educationCode,
+                      schoolCode: schoolCode,
+                      schoolNumber: schoolNumber,
+                    ),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData == false) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Error: ${snapshot.error}', // 에러명을 텍스트에 뿌려줌
+                            style: const TextStyle(fontSize: 15),
+                          ),
+                        );
+                      } else {
+                        return Column(
+                          children: [
+                            for (var schedule in snapshot.data!)
+                              PeroidAndClassContentBox(
+                                peroid: schedule.perio,
+                                schoolContent: schedule.classContent,
+                              ),
+                          ],
+                        );
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

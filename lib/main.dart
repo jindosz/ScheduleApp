@@ -14,6 +14,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(
+          backgroundColor: const Color.fromARGB(255, 36, 35, 69),
+        ),
+        cardColor: const Color.fromARGB(255, 120, 118, 254),
+        hintColor: const Color.fromARGB(255, 75, 75, 101),
+      ),
       debugShowCheckedModeBanner: false,
       routes: {
         'todayScreen': (context) => const TodayScreen(),

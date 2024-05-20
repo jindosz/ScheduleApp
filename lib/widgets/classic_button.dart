@@ -14,7 +14,7 @@ class ClassicButton extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
+            color: Colors.black.withOpacity(0.5),
             spreadRadius: 2,
             blurRadius: 4,
             offset: const Offset(2, 3),
