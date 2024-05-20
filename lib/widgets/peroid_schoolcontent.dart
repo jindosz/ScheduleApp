@@ -57,7 +57,8 @@ class PeroidAndClassContentBox extends StatelessWidget {
                     child: Center(
                       child: Text(
                         '$peroid교시',
-                        style: const TextStyle(
+                        style: TextStyle(
+                          color: Theme.of(context).hintColor,
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
                         ),
@@ -110,7 +111,8 @@ class PeroidAndClassContentBox extends StatelessWidget {
                     child: Center(
                       child: Text(
                         schoolContent,
-                        style: const TextStyle(
+                        style: TextStyle(
+                          color: Theme.of(context).hintColor,
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
                         ),

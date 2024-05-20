@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widgets/classic_button.dart';
-import '../widgets/setting.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({super.key});
@@ -43,6 +42,22 @@ class _FirstScreenState extends State<FirstScreen> {
   void initState() {
     super.initState();
     initPrefs();
+    Future.delayed(const Duration(seconds: 3), () {
+      if (isFirst) {
+        Navigator.pushNamed(context, 'setting').then((value) {
+          initPrefs();
+          Navigator.pushNamed(
+            context,
+            todayIsFirst ? 'todayScreen' : 'weekScreen',
+          );
+        });
+      } else {
+        Navigator.pushNamed(
+          context,
+          todayIsFirst ? 'todayScreen' : 'weekScreen',
+        );
+      }
+    });
   }
 
   @override
@@ -76,12 +91,7 @@ class _FirstScreenState extends State<FirstScreen> {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Setting(),
-                ),
-              ).then(
+              Navigator.pushNamed(context, 'setting').then(
                 (value) {
                   initPrefs();
                   Navigator.pushNamed(

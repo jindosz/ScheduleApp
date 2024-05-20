@@ -45,21 +45,30 @@ class _WeekScreenState extends State<WeekScreen> {
       return weekdayInstances;
     }
 
+    String currentScreen() {
+      var name = ModalRoute.of(context)?.settings.name;
+      if (name != null) {
+        return name;
+      } else {
+        return '';
+      }
+    }
+
     @override
     void initState() {
       super.initState();
       initPrefs();
     }
-    //TODO push되고 초기설정 발동되게하기
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SliderDrawer(
         sliderOpenSize: 150,
         slideDirection: SlideDirection.RIGHT_TO_LEFT,
         appBar: SliderAppBar(
+          drawerIconColor: Theme.of(context).hintColor,
           appBarHeight: 101,
-          appBarColor: Colors.yellow[100]!,
+          appBarColor: Theme.of(context).colorScheme.background,
           isTitleCenter: false,
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,11 +76,14 @@ class _WeekScreenState extends State<WeekScreen> {
               const SizedBox(
                 height: 20,
               ),
-              Text('$schoolName의'),
+              Text('$schoolName의',
+                  style: const TextStyle(
+                    color: Colors.white,
+                  )),
               const Text(
                 '이번주 시간표',
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 22,
                   fontWeight: FontWeight.w900,
                 ),
@@ -79,12 +91,9 @@ class _WeekScreenState extends State<WeekScreen> {
             ],
           ),
         ),
-        slider: const DrawerListView(),
+        slider: DrawerListView(screen: currentScreen()),
         child: Row(
           children: [
-            Column(
-              children: [Container()],
-            ),
             FutureBuilder(
               // Future를 받아오는 빌더
               future: ApiService.getSchoolSchedules(
@@ -105,8 +114,12 @@ class _WeekScreenState extends State<WeekScreen> {
                     ),
                   );
                 } else {
-                  return WeekSchedules(
-                    snapshot: snapshot.data!,
+                  return Row(
+                    children: [
+                      WeekSchedules(
+                        snapshot: snapshot.data!,
+                      ),
+                    ],
                   ); // 여기다 꾸미면됨
                 }
               },
