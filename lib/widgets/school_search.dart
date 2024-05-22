@@ -49,11 +49,11 @@ class _SchoolSearchState extends State<SchoolSearch> {
             builder: (context, snapshot) {
               if (snapshot.hasData == false) {
                 return const Center(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 10,
-                    ),
-                    child: CircularProgressIndicator(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                    ],
                   ),
                 );
               } else if (snapshot.hasError) {
