@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_schedule_app/screens/first_screen.dart';
 import 'package:flutter_schedule_app/widgets/setting.dart';
 
-import 'screens/first_screen.dart';
 import 'screens/today_screen.dart';
 import 'screens/week_screen.dart';
 
@@ -9,8 +9,14 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,7 +33,7 @@ class MyApp extends StatelessWidget {
         'weekScreen': (context) => const WeekScreen(),
         'setting': (context) => const Setting(),
       },
-      home: const FirstScreen(), //
+      home: const FirstScreen(),
     );
   }
 }

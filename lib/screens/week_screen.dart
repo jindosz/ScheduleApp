@@ -4,7 +4,9 @@ import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widgets/drawer_list_view.dart';
+import '../widgets/oneline.dart';
 import '../widgets/week_schedules.dart';
+import '../widgets/weekday.dart';
 
 class WeekScreen extends StatefulWidget {
   const WeekScreen({super.key});
@@ -14,52 +16,56 @@ class WeekScreen extends StatefulWidget {
 }
 
 class _WeekScreenState extends State<WeekScreen> {
+  late SharedPreferences prefs;
+  List perios = ['교시', '1', '2', '3', '4', '5', '6', '7'];
+  List weekdays = ['월요일', '화요일', '수요일', '목요일', '금요일'];
+  String schoolNumber = '';
+  String educationCode = '';
+  String schoolCode = '';
+  String schoolName = '학교 이름';
+  int? check;
+  String? weekday;
+
+  Future initPrefs() async {
+    prefs = await SharedPreferences.getInstance();
+    schoolNumber = prefs.getString('schoolNumber')!;
+    educationCode = prefs.getString('educationCode')!;
+    schoolCode = prefs.getString('schoolCode')!;
+    schoolName = prefs.getString('schoolName')!;
+
+    setState(() {}); // 학교 이름 Future라 늦게 와서 적용시키는 용도
+  }
+
+  List getweekdays() {
+    //월화수목금 날짜 받아옴
+    List weekdayInstances = [];
+    var now = DateTime.now();
+    for (int i = 1; i < 6; i++) {
+      var firstTime1 =
+          DateTime(now.year, now.month, now.day - (now.weekday - i));
+      var firstTime2 = firstTime1.toString().replaceAll('-', '');
+      weekdayInstances.add(firstTime2.substring(0, 8));
+    }
+    return weekdayInstances;
+  }
+
+  String currentScreen() {
+    var name = ModalRoute.of(context)?.settings.name;
+    if (name != null) {
+      return name;
+    } else {
+      return '';
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initPrefs();
+  }
+
   @override
   Widget build(BuildContext context) {
-    late SharedPreferences prefs;
-    String schoolNumber = '';
-    String educationCode = '';
-    String schoolCode = '';
-    String schoolName = '학교 이름';
-
-    Future initPrefs() async {
-      prefs = await SharedPreferences.getInstance();
-      schoolNumber = prefs.getString('schoolNumber')!;
-      educationCode = prefs.getString('educationCode')!;
-      schoolCode = prefs.getString('schoolCode')!;
-      schoolName = prefs.getString('schoolName')!;
-
-      setState(() {}); // 학교 이름 Future라 늦게 와서 적용시키는 용도
-    }
-
-    List getweekdays() {
-      //월화수목금 날짜 받아옴
-      List weekdayInstances = [];
-      var now = DateTime.now();
-      for (int i = 1; i < 6; i++) {
-        var firstTime1 =
-            DateTime(now.year, now.month, now.day - (now.weekday - i));
-        var firstTime2 = firstTime1.toString().replaceAll('-', '');
-        weekdayInstances.add(firstTime2.substring(0, 8));
-      }
-      return weekdayInstances;
-    }
-
-    String currentScreen() {
-      var name = ModalRoute.of(context)?.settings.name;
-      if (name != null) {
-        return name;
-      } else {
-        return '';
-      }
-    }
-
-    @override
-    void initState() {
-      super.initState();
-      initPrefs();
-    }
-
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SliderDrawer(
@@ -97,7 +103,6 @@ class _WeekScreenState extends State<WeekScreen> {
             FutureBuilder(
               // Future를 받아오는 빌더
               future: ApiService.getSchoolSchedules(
-                  // 받아옴
                   educationCode: educationCode,
                   schoolCode: schoolCode,
                   dates: getweekdays(),
@@ -114,13 +119,31 @@ class _WeekScreenState extends State<WeekScreen> {
                     ),
                   );
                 } else {
-                  return Row(
-                    children: [
-                      WeekSchedules(
-                        snapshot: snapshot.data!,
-                      ),
-                    ],
-                  ); // 여기다 꾸미면됨
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            for (var i in perios)
+                              Oneline(
+                                perio: i,
+                              ),
+                          ],
+                        ),
+                        for (var weekdaycontent in snapshot.data!)
+                          Column(
+                            children: [
+                              const Weekday(),
+                              for (var schedule in weekdaycontent)
+                                WeekSchedules(
+                                  schoolContent: schedule.classContent,
+                                )
+                            ],
+                          )
+                      ],
+                    ),
+                  );
                 }
               },
             ),

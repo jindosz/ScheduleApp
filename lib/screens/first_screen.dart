@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,14 +23,16 @@ class _FirstScreenState extends State<FirstScreen> {
 
     if (first == false) {
       // 이 앱에 처음 접속 아니면
-      setState(() {
-        //이거하는데
-        isFirst = false; // 밖에 나 처음 아님 알림
-        if (todayScreenIsFirst != null) {
-          // null 방지용
-          todayIsFirst = todayScreenIsFirst; // 오늘 시간표인지 아닌지 알림
-        }
-      });
+      setState(
+        () {
+          //이거하는데
+          isFirst = false; // 밖에 나 처음 아님 알림
+          if (todayScreenIsFirst != null) {
+            // null 방지용
+            todayIsFirst = todayScreenIsFirst; // 오늘 시간표인지 아닌지 알림
+          }
+        },
+      );
     } else {
       prefs.setBool('isFirst', true); // 이 앱 첨이면 첨이라고 알려줌
     }
@@ -42,45 +42,40 @@ class _FirstScreenState extends State<FirstScreen> {
   void initState() {
     super.initState();
     initPrefs();
-    Future.delayed(const Duration(seconds: 3), () {
-      if (isFirst) {
-        Navigator.pushNamed(context, 'setting').then((value) {
-          initPrefs();
+    Future.delayed(
+      const Duration(milliseconds: 50),
+      () {
+        if (isFirst) {
+          Navigator.pushNamed(context, 'setting').then(
+            (value) {
+              initPrefs();
+              Navigator.pushNamed(
+                context,
+                todayIsFirst ? 'todayScreen' : 'weekScreen',
+              );
+            },
+          );
+        } else {
           Navigator.pushNamed(
             context,
             todayIsFirst ? 'todayScreen' : 'weekScreen',
           );
-        });
-      } else {
-        Navigator.pushNamed(
-          context,
-          todayIsFirst ? 'todayScreen' : 'weekScreen',
-        );
-      }
-    });
+        }
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: isFirst
-          ? settingStartButton(context)
-          : Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        todayIsFirst ? 'todayScreen' : 'weekScreen',
-                      );
-                    },
-                    child: const ClassicButton(text: '시작하기'),
-                  ),
-                ],
-              ),
-            ),
+    return const Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(),
+          ],
+        ),
+      ),
     );
   }
 

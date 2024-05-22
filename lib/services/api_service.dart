@@ -52,17 +52,14 @@ class ApiService {
           scheduleInstances.add(SchoolScheduleModel.fromJson(schedule));
         }
         return scheduleInstances;
-      } else {
-        print('Error');
       }
       throw Error();
     } else {
-      print('Error2');
       throw Error();
     }
   }
 
-  static Future<List<dynamic>> getSchoolSchedules(
+  static Future<List> getSchoolSchedules(
       {required String educationCode,
       required String schoolCode,
       required List dates,
@@ -70,7 +67,7 @@ class ApiService {
     List weekSchoolScheduleInstances = [];
     for (var date in dates) {
       weekSchoolScheduleInstances.add(
-        getSchoolSchedule(
+        await getSchoolSchedule(
           date: date,
           educationCode: educationCode,
           schoolCode: schoolCode,

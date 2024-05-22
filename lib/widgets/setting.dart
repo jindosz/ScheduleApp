@@ -89,6 +89,7 @@ class _settingState extends State<Setting> {
   Future inputSchoolNumber() async {
     prefs = await SharedPreferences.getInstance();
     prefs.setString('schoolNumber', schoolNumber);
+    prefs.setInt('weekdays', 0); // 꼽사리
   }
 
   bool todayIsFirstScreen() {
