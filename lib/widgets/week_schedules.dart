@@ -11,7 +11,7 @@ class WeekSchedules extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 50, // 너비 설정
+      width: 60, // 너비 설정
       height: 60,
       alignment: Alignment.center,
       decoration: BoxDecoration(border: Border.all(color: Colors.white)),

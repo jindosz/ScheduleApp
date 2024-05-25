@@ -10,9 +10,9 @@ class Oneline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20.0),
+      padding: const EdgeInsets.only(left: 10.0),
       child: Container(
-        width: 50, // 너비 설정
+        width: 40, // 너비 설정
         height: 60,
         alignment: Alignment.center,
         decoration: BoxDecoration(border: Border.all(color: Colors.white)),

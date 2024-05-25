@@ -98,56 +98,61 @@ class _WeekScreenState extends State<WeekScreen> {
           ),
         ),
         slider: DrawerListView(screen: currentScreen()),
-        child: Row(
-          children: [
-            FutureBuilder(
-              // Future를 받아오는 빌더
-              future: ApiService.getSchoolSchedules(
-                  educationCode: educationCode,
-                  schoolCode: schoolCode,
-                  dates: getweekdays(),
-                  schoolNumber: schoolNumber),
-              builder: (context, snapshot) {
-                if (snapshot.hasData == false) {
-                  return const CircularProgressIndicator(); //정보받을때까지 로딩보여줌
-                } else if (snapshot.hasError) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Error: ${snapshot.error}', // 에러명을 텍스트에 뿌려줌
-                      style: const TextStyle(fontSize: 15),
-                    ),
-                  );
-                } else {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: Row(
-                      children: [
+        child: FutureBuilder(
+          // Future를 받아오는 빌더
+          future: ApiService.getSchoolSchedules(
+              educationCode: educationCode,
+              schoolCode: schoolCode,
+              dates: getweekdays(),
+              schoolNumber: schoolNumber),
+          builder: (context, snapshot) {
+            if (snapshot.hasData == false) {
+              return const Center(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                ],
+              )); //정보받을때까지 로딩보여줌
+            } else if (snapshot.hasError) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Error: ${snapshot.error}', // 에러명을 텍스트에 뿌려줌
+                  style: const TextStyle(fontSize: 15),
+                ),
+              );
+            } else {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Column(
+                        children: [
+                          for (var i in perios)
+                            Oneline(
+                              perio: i,
+                            ),
+                        ],
+                      ),
+                      for (var weekdaycontent in snapshot.data!)
                         Column(
                           children: [
-                            for (var i in perios)
-                              Oneline(
-                                perio: i,
-                              ),
+                            const Weekday(),
+                            for (var schedule in weekdaycontent)
+                              WeekSchedules(
+                                schoolContent: schedule.classContent,
+                              )
                           ],
-                        ),
-                        for (var weekdaycontent in snapshot.data!)
-                          Column(
-                            children: [
-                              const Weekday(),
-                              for (var schedule in weekdaycontent)
-                                WeekSchedules(
-                                  schoolContent: schedule.classContent,
-                                )
-                            ],
-                          )
-                      ],
-                    ),
-                  );
-                }
-              },
-            ),
-          ],
+                        )
+                    ],
+                  ),
+                ),
+              );
+            }
+          },
         ),
       ),
     );

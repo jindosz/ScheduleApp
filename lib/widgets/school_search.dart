@@ -93,7 +93,7 @@ class _SchoolSearchState extends State<SchoolSearch> {
                   flex: 1,
                 ),
                 Flexible(
-                  flex: 3,
+                  flex: 4,
                   child: Center(
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -160,7 +160,7 @@ class _SchoolSearchState extends State<SchoolSearch> {
                         flex: 1,
                       ),
                       Flexible(
-                        flex: 3,
+                        flex: 4,
                         child: Center(
                           child: SizedBox(
                             child: Text(

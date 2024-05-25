@@ -48,7 +48,7 @@ class _WeekdayState extends State<Weekday> {
       future: Future.delayed(const Duration(milliseconds: 5), () {}),
       builder: (BuildContext context, AsyncSnapshot<Null> snapshot) {
         return Container(
-          width: 50, // 너비 설정
+          width: 60, // 너비 설정
           height: 60,
           alignment: Alignment.center,
           decoration: BoxDecoration(border: Border.all(color: Colors.white)),
